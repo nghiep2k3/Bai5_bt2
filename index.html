@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Nhập vào thông tin khoản vay</h1>
+    <div>
+        <label for="money" style="padding-right: 200px;">1) Số tiền:</label>
+        <input id="money" placeholder="Tính theo m" aria-describedby="emailHelp" style="margin-bottom: 10px;">
+    </div>
+
+    <div>
+        <label for="interest" style="padding-right: 103px;" >2) Lãi suất hàng năm(%):</label>
+        <input id="interest" placeholder="Tính theo m" aria-describedby="emailHelp" style="margin-bottom: 10px;">
+    </div>
+
+    <div>
+        <label for="payments" style="padding-right: 124px;" >3) Thời gian trả(năm):</label>
+        <input id="payments" placeholder="Tính theo m" aria-describedby="emailHelp" style="margin-bottom: 10px;">
+    </div>
+
+    <button  type="submit" id="submit"  value="Button">Button</button>
+
+    <h2>Thông tin thanh toán</h2>
+    <div>
+        <label for="payMonth" style="padding-right: 73px;" >4) Số tiền phải trả hàng tháng:</label>
+        <div  id="four" style="display: inline-block; margin-top: 8px; border: 1px solid black; width: 170px; height: 18px;">
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <div>
+        <label for="totalPaymoney" style="padding-right: 113px;" >5) Tổng số tiền phải trả:</label>
+        <div id="five"  style="display: inline-block; margin-top: 8px; border: 1px solid black; width: 170px; height: 20px;">
+            <div id="result1"></div>
+        </div>
+    </div>
+
+    <div>
+        <label for="totalPayinterest" style="padding-right: 121px;" >6) Tổng số lãi phải trả:</label>
+        <div id="six" style="display: inline-block; margin-top: 8px; border: 1px solid black; width: 170px; height: 18px;">
+            <div id="result2"></div>
+        </div>
+    </div>
+
+    <script>
+        var submitBtn = document.querySelector('button[type = submit]');
+
+        submitBtn.addEventListener('submit', (event) => {
+            event.preventDefault(); // Stop the form from submitting
+            // Perform custom form submission logic here
+        });
+                
+        var one = document.querySelector('#money')
+        console.log(one);
+        var two = document.querySelector('#interest')
+        console.log(two);
+        var three = document.querySelector('#payments')
+        console.log(three);
+        var four = document.querySelector('#result')
+        console.log(four);
+        var five = document.querySelector('#result1')
+        var six = document.querySelector('#result2')
+
+
+        submitBtn.addEventListener('click', function (){
+            var a = Number(one.value);
+            // console.log(a);
+            var b = Number((two.value) / 100);
+            // console.log((b / 12).toFixed(6));
+            var c = Number((three.value));
+            // console.log(c);
+            var x = Math.pow(1+b,c);
+            console.log(x);
+
+            var payMonth = (a*x*(b / 12)) / (x -1)
+            four.innerText = payMonth.toFixed(2)
+
+            var totalPaymoney = payMonth * (c * 12)
+            five.innerText = totalPaymoney.toFixed(2)
+
+            var totalPayinterest = totalPaymoney - a
+            six.innerText = totalPayinterest.toFixed(2)
+
+        })
+    </script>
+</body>
+</html>
